@@ -151,7 +151,7 @@ https://github.com/litongjava/whisper.cpp.android.java.demo/releases/tag/v1.0.0
 
 对于 **调试** 目的，您可以使用第一个或第二个文件。但如果您打算 **发布** 或在 **其他 Android 项目中使用**，建议您选择第三个剥离后的文件，因为它的大小会更小，并且不包含不必要的调试信息。
 
-所以，为了在其他 Android 项目中使用，请选择 `app\build\intermediates\stripped_native_libs\debug\out\lib\arm64-v8a\libwhisper_v8fp16_va.so` 文件。如果您需要在其他项目中进行调试，那么可以考虑使用未剥离的版本。
+所以，为了在其他 Android 项目中使用，请选择 `AndroidWhisperCppLibrary-stripped_native_libs.zip` 文件。如果您需要在其他项目中进行调试，那么可以考虑使用未剥离的版本。
 
 
 ### 1.2.2.查看so文件中的Java方法

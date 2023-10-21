@@ -152,7 +152,7 @@ https://github.com/litongjava/whisper.cpp.android.java.demo/releases/tag/v1.0.0
 
 For **debugging** purposes, you can use the first or second file. However, if you intend to **release** or use it in **other Android projects**, it is recommended that you choose the third stripped file as it will be smaller in size and will not contain unnecessary debugging information.
 
-So, for use in other Android projects, choose the `app\build\intermediates\stripped_native_libs\debug\out\lib\arm64-v8a\libwhisper_v8fp16_va.so` file. If you need to debug in other projects, then consider using the unstripped version.
+So, for use in other Android projects, choose the `AndroidWhisperCppLibrary-stripped_native_libs.zip` file. If you need to debug in other projects, then consider using the unstripped version.
 
 
 ### 1.2.2.View Java methods in so files
@@ -767,12 +767,12 @@ public class WaveEncoder {
   }
 }
 ```
-### 1.3.6.识别wav文件
+### 1.3.6.transcript wav file
 #### 1.3.6.1.WhisperService
 ```
-加载模型
+//load model
 whisperContext = WhisperContext.createContextFromFile(modelPath);
-识别文件
+// transcript
 transcription = whisperContext.transcribeData(audioData);
 ```
 
