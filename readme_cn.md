@@ -1,8 +1,8 @@
 # whisper.cpp.android.java.demo
-[中文](readme_cn.md)|[English](readme.md)
-A sample Android app using java code and [whisper.cpp library](https://github.com/ggerganov/whisper.cpp/) to do voice-to-text transcriptions.
-## 1.Android integration with whisper.cpp library using Java code
-### 1.1.directory structure
+[中文](readme_cn.md)|[English](readme.md)  
+使用 Java 代码和 [whisper.cpp 库](https://github.com/ggerganov/whisper.cpp/) 进行语音到文本转录的示例 Android 应用程序。
+## 1.Android整合whisper.cpp库使用Java代码
+### 1.1.目录结构
 ```
 ├── app
 │   ├── .gitignore
@@ -139,23 +139,22 @@ A sample Android app using java code and [whisper.cpp library](https://github.co
 ├── readme_cn.md
 ├── settings.gradle
 ```
-## 1.2.Prepare the file
-### 1.2.1.download AndroidWhisperCppLibrary
-
+## 1.2.准备文件
+### 1.2.1.下载AndroidWhisperCppLibrary
 https://github.com/litongjava/whisper.cpp.android.java.demo/releases/tag/v1.0.0
 
-1. `cmake\obj\arm64-v8a\libwhisper_v8fp16_va.so`: This is the bare, unoptimized or stripped .so file. It may contain debugging information and unused code snippets.
+1. `cmake\obj\arm64-v8a\libwhisper_v8fp16_va.so`: 这是原始的、未经优化或剥离的 .so 文件。它可能包含调试信息和未使用的代码段。
 
-2. `AndroidWhisperCppLibrary-merged_native_libs.zip: This is the merged .so file, which may merge multiple native libraries, but may still contain debugging information.
+2. `AndroidWhisperCppLibrary-merged_native_libs.zip: 这个文件是合并后的 .so 文件，它可能会合并多个原生库，但仍然可能包含调试信息。
 
-3. `AndroidWhisperCppLibrary-stripped_native_libs.zip`: This file has been "stripped", meaning that it no longer contains debugging information, and is therefore smaller in size. Stripped .so files are often used to reduce the size of the APK when distributing an application.
+3. `AndroidWhisperCppLibrary-stripped_native_libs.zip`: 这个文件已被“剥离”，意味着它不再包含调试信息，因此大小会更小。在发布应用时，为了减少 APK 大小，通常会使用剥离后的 .so 文件。
 
-For **debugging** purposes, you can use the first or second file. However, if you intend to **release** or use it in **other Android projects**, it is recommended that you choose the third stripped file as it will be smaller in size and will not contain unnecessary debugging information.
+对于 **调试** 目的，您可以使用第一个或第二个文件。但如果您打算 **发布** 或在 **其他 Android 项目中使用**，建议您选择第三个剥离后的文件，因为它的大小会更小，并且不包含不必要的调试信息。
 
-So, for use in other Android projects, choose the `app\build\intermediates\stripped_native_libs\debug\out\lib\arm64-v8a\libwhisper_v8fp16_va.so` file. If you need to debug in other projects, then consider using the unstripped version.
+所以，为了在其他 Android 项目中使用，请选择 `app\build\intermediates\stripped_native_libs\debug\out\lib\arm64-v8a\libwhisper_v8fp16_va.so` 文件。如果您需要在其他项目中进行调试，那么可以考虑使用未剥离的版本。
 
 
-### 1.2.2.View Java methods in so files
+### 1.2.2.查看so文件中的Java方法
 ```
 # nm libwhisper_v8fp16_va.so |grep Java
                  U AAssetManager_fromJava
@@ -173,21 +172,21 @@ So, for use in other Android projects, choose the `app\build\intermediates\strip
 ### 1.2.3.model
 https://github.com/litongjava/whisper.cpp.android.java.demo/releases/download/v1.0.0/ggml-tiny.bin
 
-## 1.3.integration project
-### 1.3.1.Adding libraries and models
+## 1.3.整合工程
+### 1.3.1.添加库和模型
 To use:  
-1. Download AndroidWhisperCppLibrary-stripped_native_libs.zip unzip it to app\src\main\jniLibs
-2. From [whisper.cpp library](https://github.com/ggerganov/whisper.cpp/tree/master/models). [^1] Select a model.
-3. Copy the model to the "app/src/main/assets/models" folder.
-4. Select a sample audio file (e.g. [jfk.wav] (https://github.com/ggerganov/whisper.cpp/raw/master/samples/jfk.wav)).
-5. Copy the sample to the "app/src/main/assets/samples" folder.
-6. Modify the modelFilePath in WhisperService.java.
-7. Modify the sampleFilePath in WhisperService.java 7.
-8. Select the "release" active build variant, then run and deploy to the device using Android Studio.
-[^1]: I recommend running `ggml-tiny.bin` on Android devices.
+1. 下载AndroidWhisperCppLibrary-stripped_native_libs.zip解压到app\src\main\jniLibs
+2. 从 [whisper.cpp 资源库](https://github.com/ggerganov/whisper.cpp/tree/master/models)。[^1] 中选择一个模型。
+3. 将模型复制到 "app/src/main/assets/models "文件夹。
+4. 选择一个样本音频文件（例如 [jfk.wav](https://github.com/ggerganov/whisper.cpp/raw/master/samples/jfk.wav)）。
+5. 将样本复制到 "app/src/main/assets/samples "文件夹。
+6. 修改 WhisperService.java 中的 modelFilePath。
+7. 修改 WhisperService.java 中的 sampleFilePath 7.
+8. 选择 "release "活动构建变量，然后使用 Android Studio 运行并部署到设备上。
+[^1]: 我推荐在 Android 设备上运行ggml-tiny.bin。
 
 ### 1.3.2.添加sourceSets
-Modify app/build.gradle to add jniLibs to sourceSets
+修改app/build.gradle添加jniLibs到sourceSets
 ```
   sourceSets {
     main {
@@ -195,14 +194,14 @@ Modify app/build.gradle to add jniLibs to sourceSets
     }
   }
 ```
-### 1.3.3.Adding Dependencies
+### 1.3.3.添加依赖
 ```
 //litongjava
 implementation 'com.litongjava:android-view-inject:1.0'
 implementation 'com.litongjava:jfinal-aop:1.0.1'
 implementation 'com.litongjava:litongjava-android-utils:1.0.0'
 ```
-### 1.3.4.Whisper Cpp Java code
+### 1.3.4.Whisper Cpp Java代码
 #### 1.3.4.1.CpuInfo
 ```
 package com.whispercppdemo.whisper;
