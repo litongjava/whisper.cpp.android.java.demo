@@ -1,4 +1,4 @@
-package com.litongjava.whisper.cpp.android.java.demo.media;
+package com.litongjava.whisper.cpp.android.java.media;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

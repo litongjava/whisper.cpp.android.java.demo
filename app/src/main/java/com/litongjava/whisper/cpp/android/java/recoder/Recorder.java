@@ -1,11 +1,11 @@
-package com.litongjava.whisper.cpp.android.java.demo.recoder;
+package com.litongjava.whisper.cpp.android.java.recoder;
 
 import android.annotation.SuppressLint;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 
-import com.litongjava.whisper.cpp.android.java.demo.media.WaveEncoder;
+import com.litongjava.whisper.cpp.android.java.media.WaveEncoder;
 
 import java.io.File;
 import java.util.ArrayList;

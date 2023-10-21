@@ -1,4 +1,4 @@
-package com.litongjava.whisper.cpp.android.java.demo.utils;
+package com.litongjava.whisper.cpp.android.java.utils;
 
 import android.content.Context;
 

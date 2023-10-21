@@ -47,5 +47,6 @@ dependencies {
 
   //litongjava
   implementation 'com.litongjava:android-view-inject:1.0'
+  implementation 'com.litongjava:jfinal-aop:1.0.1'
   implementation 'com.litongjava:litongjava-android-utils:1.0.0'
 }
