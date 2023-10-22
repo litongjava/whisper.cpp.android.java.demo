@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
+import com.litongjava.jfinal.aop.Aop;
 import com.litongjava.whisper.cpp.android.java.bean.WhisperSegment;
 import com.litongjava.whisper.cpp.android.java.media.WaveEncoder;
 import com.litongjava.whisper.cpp.android.java.single.LocalWhisper;
@@ -22,34 +23,34 @@ import java.util.concurrent.ExecutionException;
 public class WhisperService {
   private Logger log = LoggerFactory.getLogger(this.getClass());
 
-  private final Object lock = new Object();
 
   @RequiresApi(api = Build.VERSION_CODES.O)
-  public void loadModel(Context context, TextView tv) {
+  public void loadModel() {
+
     String modelFilePath = LocalWhisper.modelFilePath;
-    String msg = "load model from :" + modelFilePath + "\n";
-    outputMsg(tv, msg);
+    String msg = "load model from :" + modelFilePath ;
+    outputMsg(msg);
 
     long start = System.currentTimeMillis();
     LocalWhisper.INSTANCE.init();
     long end = System.currentTimeMillis();
     msg = "model load successful:" + (end - start) + "ms";
-    outputMsg(tv, msg);
+    outputMsg(msg);
 
   }
 
-  public void transcribeSample(Context context, TextView tv) {
+  public void transcribeSample(Context context, TextView tv, String sampleFilePath) {
     String msg = "";
     long start = System.currentTimeMillis();
-    String sampleFilePath = "samples/jfk.wav";
+
     File filesDir = context.getFilesDir();
     File sampleFile = AssetUtils.copyFileIfNotExists(context, filesDir, sampleFilePath);
     long end = System.currentTimeMillis();
     msg = "copy file:" + (end - start) + "ms";
-    outputMsg(tv, msg);
+    outputMsg(msg);
 
     msg = "transcribe file from :" + sampleFile.getAbsolutePath();
-    outputMsg(tv, msg);
+    outputMsg(msg);
 
     start = System.currentTimeMillis();
     float[] audioData = new float[0];  // 读取音频样本
@@ -61,7 +62,7 @@ public class WhisperService {
     }
     end = System.currentTimeMillis();
     msg = "decode wave file:" + (end - start) + "ms";
-    outputMsg(tv, msg);
+    outputMsg(msg);
 
     start = System.currentTimeMillis();
     List<WhisperSegment> transcription = null;
@@ -76,14 +77,14 @@ public class WhisperService {
     }
     end = System.currentTimeMillis();
     msg = "Transcript successful:" + (end - start) + "ms";
-    outputMsg(tv, msg);
+    outputMsg(msg);
 
     msg = "Transcription:" + transcription.toString();
-    outputMsg(tv, msg);
+    outputMsg(msg);
   }
 
-  private void outputMsg(TextView tv, String msg) {
-    tv.append(msg + "\n");
+  private void outputMsg(String msg) {
+    Aop.get(OutputTextViewService.class).println(msg);
     log.info(msg);
   }
 
